@@ -27,12 +27,12 @@ fi
 
 get_perf_test_runtime_dir()
 {
-	perf_test_name=$1
-	if [ -z "$perf_test_name" ]
+	runtime_dir=$PERF_RUNNER_RUNTIME/$perf_test_name/$perf_test_uuid
+	if [ ! -d $runtime_dir ]
 	then
-		exit 1
+		mkdir -p $runtime_dir
 	fi
-	return 
+	echo "$runtime_dir"
 }
 
 # get the perf test data dir
