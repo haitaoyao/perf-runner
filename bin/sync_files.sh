@@ -29,9 +29,9 @@ do
 		echo "no servers.conf in $PERF_RUNNER_DEPLOY_FOLDER/$perf_test_name/$server_group, script exit"
 		exit 2
 	fi
-	if [ $(wc -l $server_group/servers.conf) -lt 1 ]
+	if [ "$(wc -l $server_group/servers.conf|awk '{print $1}')" -lt 1 ]
 	then
-		echo "no server address in $PERF_RUNNER_DEPLOY_FOLDE    R/$perf_test_name/$server_group/servers.conf, script exit"
+		echo "no server address in $PERF_RUNNER_DEPLOY_FOLDE/$perf_test_name/$server_group/servers.conf, script exit"
 		exit 2
 	fi
 	echo "rsync files for server group: $server_group, servers: "

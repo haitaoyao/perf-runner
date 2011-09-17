@@ -49,3 +49,10 @@ then
 	echo "no perf test : $perf_test_name in $PERF_RUNNER_DEPLOY_FOLDER"
 	exit 1
 fi
+
+# sync files
+bash $current_dir/sync_files.sh $perf_test_name
+if [ "$?" -ne 0 ]
+then
+	exit 2
+fi
