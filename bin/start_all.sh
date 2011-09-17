@@ -32,7 +32,7 @@ do
 	echo "start server_group: $server_group"
 	for server_address in $(cat $server_group/servers.conf)
 	do
-		ssh $server_address "$PERF_RUNNER_HOME/bin/start_perf_test.sh $perf_test_name"
+		ssh $server_address "$PERF_RUNNER_HOME/bin/start_perf_test.sh $perf_test_name $perf_test_uuid"
 		exit_code=$?
 		if [ "$exit_code" -ne '0' ]
 		then
