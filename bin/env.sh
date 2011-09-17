@@ -25,7 +25,7 @@ then
 	mkdir -p $PERF_RUNNER_RUNTIME
 fi
 
-get_perf_test_runtim_dir()
+get_perf_test_runtime_dir()
 {
 	perf_test_name=$1
 	if [ -z "$perf_test_name" ]
@@ -33,6 +33,17 @@ get_perf_test_runtim_dir()
 		exit 1
 	fi
 	return 
+}
+
+# get the perf test data dir
+get_perf_test_data_dir()
+{
+	perf_data_dir="$PERF_RUNNER_HOME/data/$perf_test_name/$perf_test_uuid"
+	if [ ! -d "$perf_data_dir" ]
+	then
+		mkdir -p $perf_data_dir
+	fi
+	echo "$perf_data_dir"
 }
 
 create_perf_test_uuid()
