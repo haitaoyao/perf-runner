@@ -7,8 +7,7 @@
 # 
 ##################################################################
 current_dir="$(cd $(dirname $0);pwd)"
-PERF_RUNNER_HOME="$(cd $(dirname $0)/../;pwd)"
-PERF_RUNNER_DEPLOY_FOLDER=$PERF_RUNNER_HOME/deploy
+. $current_dir/env.sh
 # print the help information
 function print_help()
 {
