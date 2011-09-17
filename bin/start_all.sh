@@ -21,7 +21,7 @@ fi
 cd $PERF_RUNNER_DEPLOY_DIR/$perf_test_name 
 
 create the uuid
-perf_test_uuid=${perf_test_name}__$(get_perf_test_uuid)
+perf_test_uuid=$(create_perf_test_uuid $perf_test_name)
 echo "start the perf test, uuid: $perf_test_uuid"
 for server_group in $(ls |sort)
 do

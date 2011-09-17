@@ -37,5 +37,6 @@ get_perf_test_runtim_dir()
 
 create_perf_test_uuid()
 {
-	return $(date +%Y%m%d.%H%M%S.$(expr $(date +%s ) % 100)) 
+	perf_test_name=$1
+	echo "${perf_test_name}__$(date +%Y%m%d.%H%M%S.$(expr $(date +%s ) % 100)) "
 }
