@@ -43,15 +43,21 @@ do
 	esac
 
 done
-if [ ! -d $PERF_RUNNER_DEPLOY_FOLDER/$perf_test_name ]
+if [ ! -d $PERF_RUNNER_DEPLOY_DIR/$perf_test_name ]
 then
 	# no perf test in deploy folder, exit 
-	echo "no perf test : $perf_test_name in $PERF_RUNNER_DEPLOY_FOLDER"
+	echo "no perf test : $perf_test_name in $PERF_RUNNER_DEPLOY_DIR"
 	exit 1
 fi
 
 # sync files
 bash $current_dir/sync_files.sh $perf_test_name
+if [ "$?" -ne 0 ]
+then
+	exit 2
+fi
+
+bash $current_dir/start_all.sh $perf_test_name
 if [ "$?" -ne 0 ]
 then
 	exit 2

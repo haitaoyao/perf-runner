@@ -16,7 +16,7 @@ then
 	exit 1
 fi
 
-cd $PERF_RUNNER_DEPLOY_FOLDER/$perf_test_name 
+cd $PERF_RUNNER_DEPLOY_DIR/$perf_test_name 
 
 for server_group in $(ls |sort)
 do
@@ -26,12 +26,12 @@ do
 	fi
 	if [ ! -f $server_group/servers.conf ]
 	then
-		echo "no servers.conf in $PERF_RUNNER_DEPLOY_FOLDER/$perf_test_name/$server_group, script exit"
+		echo "no servers.conf in $PERF_RUNNER_DEPLOY_DIR/$perf_test_name/$server_group, script exit"
 		exit 2
 	fi
 	if [ "$(wc -l $server_group/servers.conf|awk '{print $1}')" -lt 1 ]
 	then
-		echo "no server address in $PERF_RUNNER_DEPLOY_FOLDE/$perf_test_name/$server_group/servers.conf, script exit"
+		echo "no server address in $PERF_RUNNER_DEPLOY_DIR/$perf_test_name/$server_group/servers.conf, script exit"
 		exit 2
 	fi
 	echo "rsync files for server group: $server_group, servers: "
