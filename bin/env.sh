@@ -34,3 +34,8 @@ get_perf_test_runtim_dir()
 	fi
 	return 
 }
+
+create_perf_test_uuid()
+{
+	return $(date +%Y%m%d.%H%M%S.$(expr $(date +%s ) % 100)) 
+}
