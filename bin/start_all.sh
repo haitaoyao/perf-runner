@@ -33,7 +33,7 @@ do
 	for server_address in $(cat $server_group/servers.conf)
 	do
 		ssh $server_address "$PERF_RUNNER_HOME/bin/start_collectors.sh $perf_test_name $perf_test_uuid"
-		ssh $server_address "$PERF_RUNNER_HOME/bin/start_perf_test.sh $perf_test_name $server_group"
+		ssh $server_address "$PERF_RUNNER_HOME/bin/start_perf_test.sh $perf_test_name $server_group $perf_test_uuid"
 		exit_code=$?
 		if [ "$exit_code" -ne '0' ]
 		then
