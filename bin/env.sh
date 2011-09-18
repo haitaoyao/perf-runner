@@ -55,7 +55,7 @@ get_perf_test_data_dir()
 # get the perf test log dir
 get_perf_test_log_dir()
 {
-	perf_log_dir="$PERF_RUNNER_HOME/logs/$perf_test_name/$perf_test_uuid"
+	perf_log_dir="$PERF_RUNNER_HOME/logs/$perf_test_name/$perf_test_uuid/$server_group"
 	if [ ! -d "$perf_log_dir" ]
 	then
 		mkdir -p $perf_log_dir
