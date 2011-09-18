@@ -10,6 +10,7 @@ current_dir="$(cd $(dirname $0);pwd)"
 export PERF_RUNNER_HOME="$(cd $(dirname $0)/../;pwd)"
 export PERF_RUNNER_DEPLOY_DIR=$PERF_RUNNER_HOME/deploy
 export PERF_RUNNER_RUNTIME=$PERF_RUNNER_HOME/tmp/runtime
+export PERF_RUNNER_CONFIG_DIR=$PERF_RUNNER_HOME/config
 if [ ! -d $PERF_RUNNER_HOME/logs ]
 then
 	mkdir $PERF_RUNNER_HOME/logs

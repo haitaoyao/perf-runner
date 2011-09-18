@@ -29,5 +29,5 @@ then
 fi
 cd $PERF_RUNNER_DEPLOY_DIR/$perf_test_name 
 
-nohup bash start.sh >> $(get_perf_test_data_dir)/$server_group.csv 2>$(get_perf_test_data_dir)/$server_group.log &
+nohup bash $server_group/start.sh >> $(get_perf_test_data_dir)/$server_group.csv 2>$(get_perf_test_data_dir)/$server_group.log &
 

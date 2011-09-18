@@ -38,7 +38,7 @@ do
 	echo "$(cat $server_group/servers.conf)"
 	for server_address in $(cat $server_group/servers.conf)
 	do
-		rsync -a $PERF_RUNNER_HOME/ $server_address:$PERF_RUNNER_HOME/
+		rsync -a --exclude-from=$PERF_RUNNER_CONFIG_DIR/sync_excluded_files $PERF_RUNNER_HOME/ $server_address:$PERF_RUNNER_HOME/
 		exit_code=$?
 		if [ "$exit_code" -ne '0' ]
 		then
