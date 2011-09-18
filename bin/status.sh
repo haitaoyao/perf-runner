@@ -32,6 +32,10 @@ cd $PERF_RUNNER_DEPLOY_DIR/$perf_test_name
 
 check_server_group_status()
 {
+	echo
+	echo "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
+	echo
+	echo "test unit: $server_group"
 	for server_address in $(get_server_address $server_group/servers.conf)
 	do
 		echo "perf_test: $perf_test_name status @ $server_address: "
