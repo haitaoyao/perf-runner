@@ -16,11 +16,19 @@ then
 	echo "Usage: $0 perf_test_name perf_test_uuid"
 	exit 1
 fi
-perf_test_uuid=$2
+perf_test_uuid=$3
 if [ -z "$perf_test_uuid" ]
 then
 	echo "no perf_test_uuid"
 	echo "Usage: $0 perf_test_name perf_test_uuid"
+	exit 1
+fi
+
+server_group=$2
+if [ -z "$server_group" ]
+then
+	echo "no server_group"
+	echo "Usage: $0 perf_test_name perf_test_uuid server_group"
 	exit 1
 fi
 

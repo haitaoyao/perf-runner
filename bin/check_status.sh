@@ -10,10 +10,11 @@ current_dir="$(cd $(dirname $0);pwd)"
 . $current_dir/env.sh
 
 perf_test_name=$1
-perf_test_uuid=$2
+server_group=$2
+perf_test_uuid=$3
 if [ -z "$perf_test_name" ]
 then
-	echo "Usage: $0 perf_test_name perf_test_uuid"
+	echo "Usage: $0 perf_test_name server_group perf_test_uuid"
 	exit 1
 fi
 
@@ -41,25 +42,21 @@ function status_collectors()
 function status_perf_test()
 {
 	perf_test_uuid=$1
-	cd $perf_test_uuid
+	cd $perf_test_uuid/$server_group
 	if [ -f "$perf_test_name.pid" ]
 	then
 		perf_test_pid=$(cat $perf_test_name.pid)
 		if [ -z "$(ps aux|grep $perf_test_pid|grep -v grep)" ]
 		then
 			printf "\t$perf_test_uuid is dead already\n"
-			cleanup_collectors
-			cd ../
-			rm -rf $perf_test_uuid
+			cleanup_runtime_dir
 		else
 			printf "\tperf_test: $perf_test_uuid is still alive\n"
 			status_collectors
 			cd ../
 		fi
 	else
-		cleanup_collectors
-		cd ../
-		rm -rf $perf_test_uuid
+		cleanup_runtime_dir
 	fi
 }
 cd $PERF_RUNNER_RUNTIME/$perf_test_name
@@ -71,10 +68,12 @@ else
 	echo "check all the perf  test for $perf_test_name"
 	for perf_test_uuid in $(ls |sort)
 	do
-		if [ -d "$perf_test_uuid" ]
+		if [ -d "$perf_test_uuid/$server_group" ]
 		then
 			status_perf_test $perf_test_uuid
 			echo "--------------------------------------------"
+		else
+			echo "no uuid: $perf_test_uuid server_group: $server_group here"
 		fi
 	done
 fi

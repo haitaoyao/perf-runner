@@ -28,7 +28,12 @@ fi
 
 get_perf_test_runtime_dir()
 {
-	runtime_dir=$PERF_RUNNER_RUNTIME/$perf_test_name/$perf_test_uuid
+	if [ -z "$perf_test_name" -o -z "$perf_test_uuid" -o -z "$server_group" ]
+	then
+		echo "failed to get perf runtime dir"
+		exit 3
+	fi
+	runtime_dir=$PERF_RUNNER_RUNTIME/$perf_test_name/$perf_test_uuid/$server_group
 	if [ ! -d $runtime_dir ]
 	then
 		mkdir -p $runtime_dir
@@ -81,4 +86,17 @@ function cleanup_collectors()
 			printf "\tcollector: $pid_file killed\n"
 		fi
 	done
+}
+
+# cleanup runtime dir
+function cleanup_runtime_dir()
+{
+	cleanup_collectors
+	cd ../
+	rm -rf $server_group
+	if [ -z "$(ls)" ]
+	then
+		cd ../
+		rm -rf $perf_test_uuid
+	fi
 }

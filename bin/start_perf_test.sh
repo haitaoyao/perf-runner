@@ -9,22 +9,26 @@
 current_dir="$(cd $(dirname $0);pwd)"
 . $current_dir/env.sh
 
+function print_help()
+{
+	echo "Usage: $0 perf_test_name server_group perf_test_uuid"
+}
 perf_test_name=$1
 if [ -z "$perf_test_name" ]
 then
-	echo "no perf_test_name"
+	print_help
 	exit 1
 fi
 server_group=$2
 if [ -z "$server_group" ]
 then
-	echo "no server_group"
+	print_help
 	exit 1
 fi
 perf_test_uuid=$3
 if [ -z "$perf_test_uuid" ]
 then
-	echo "no perf_test_uuid"
+	print_help
 	exit 1
 fi
 cd $PERF_RUNNER_DEPLOY_DIR/$perf_test_name 

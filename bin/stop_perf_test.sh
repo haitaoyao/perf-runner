@@ -11,11 +11,12 @@ current_dir="$(cd $(dirname $0);pwd)"
 
 function print_help()
 {
-	echo "Usage: $0 perf_test_name perf_test_uuid"
+	echo "Usage: $0 perf_test_name server_group perf_test_uuid "
 }
 perf_test_name=$1
-perf_test_uuid=$2
-if [ -z "$perf_test_name" -o -z "$perf_test_uuid" ]
+server_group=$2
+perf_test_uuid=$3
+if [ -z "$perf_test_name" -o -z "$perf_test_uuid" -o -z "$server_group" ]
 then
 	print_help
 	exit 1
@@ -52,6 +53,5 @@ function stop_perf_test()
 }
 
 stop_perf_test
-cleanup_collectors
-cd ../
-rm -rf $perf_test_uuid
+cleanup_runtime_dir
+

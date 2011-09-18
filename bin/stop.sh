@@ -47,7 +47,7 @@ do
 	for server_address in $(get_server_address $server_group/servers.conf)
 	do
 		echo "stop perf_test: $perf_test_name @ $server_address: "
-		ssh $server_address "bash $PERF_RUNNER_HOME/bin/stop_perf_test.sh $perf_test_name $perf_test_uuid"
+		ssh $server_address "bash $PERF_RUNNER_HOME/bin/stop_perf_test.sh $perf_test_name $server_group $perf_test_uuid"
 	done
 	echo
 done
