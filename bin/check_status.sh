@@ -29,10 +29,10 @@ function cleanup_collectors()
 	for pid_file in $(ls *.pid|grep -v "$perf_test_name")
 	do
 		collector_pid=$(cat $pid_file)
-		if [ -n "$(ps aux|grep $collector_pid)" ]
+		if [ -n "$(ps aux|grep $collector_pid)|grep -v 'grep'" ]
 		then
 			kill -9 $collector_pid
-			echo "collector: $pid_file killed"
+			printf "\tcollector: $pid_file killed\n"
 		fi
 	done
 }
@@ -44,9 +44,9 @@ function status_collectors()
 		collector_pid=$(cat $pid_file)
 		if [ -n "$(ps aux|grep $collector_pid)" ]
 		then
-			echo "collector: $pid_file is alive"
+			printf "\tcollector: $pid_file is alive\n"
 		else
-			echo "collector: $pid_file is dead"
+			printf "\tcollector: $pid_file is dead\n"
 		fi
 	done
 		
@@ -55,20 +55,25 @@ function status_collectors()
 function status_perf_test()
 {
 	perf_test_uuid=$1
-	cd perf_test_uuid
+	cd $perf_test_uuid
 	if [ -f "$perf_test_name.pid" ]
 	then
-		if [ -z "$(ps aux|grep $perf_test_name.pid)" ]
+		perf_test_pid=$(cat $perf_test_name.pid)
+		if [ -z "$(ps aux|grep $perf_test_pid|grep -v grep)" ]
 		then
-			echo "$perf_test_uuid is dead already"
+			printf "\t$perf_test_uuid is dead already\n"
 			cleanup_collectors
 			cd ../
 			rm -rf $perf_test_uuid
 		else
-			echo "perf_test: $perf_test_uuid is still alive"
+			printf "\tperf_test: $perf_test_uuid is still alive\n"
 			status_collectors
 			cd ../
 		fi
+	else
+		cleanup_collectors
+		cd ../
+		rm -rf $perf_test_uuid
 	fi
 }
 cd $PERF_RUNNER_RUNTIME/$perf_test_name
@@ -83,7 +88,10 @@ else
 		if [ -d "$perf_test_uuid" ]
 		then
 			status_perf_test $perf_test_uuid
+			echo "###############################################"
 		fi
 	done
 fi
-
+echo "###############################################"
+echo "###############################################"
+echo
