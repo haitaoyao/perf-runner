@@ -44,7 +44,7 @@ do
 			;;
 	esac	
 done
-if [ -z "$perf_test_name" -o -z "$perf_test_uuid" ]
+if [ -z "$perf_test_name" -o -z "$perf_test_uuid" -o -z "$collector_name" ]
 then
 	print_help
 	exit 1
