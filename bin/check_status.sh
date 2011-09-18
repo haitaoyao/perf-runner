@@ -72,10 +72,15 @@ else
 		then
 			status_perf_test $perf_test_uuid
 			echo "--------------------------------------------"
+			alive_perf_found='true'
 		else
 			echo "no uuid: $perf_test_uuid server_group: $server_group here"
 		fi
 	done
+	if [ -z "$alive_perf_found" ]
+	then
+		printf "\tno alive perf test found\n"
+	fi
 fi
 echo
 echo "###############################################"

@@ -51,3 +51,4 @@ do
 	done
 	echo
 done
+bash $current_dir/gather_result.sh $perf_test_name $perf_test_uuid
