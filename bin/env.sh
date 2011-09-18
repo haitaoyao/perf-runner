@@ -47,6 +47,16 @@ get_perf_test_data_dir()
 	echo "$perf_data_dir"
 }
 
+# get the perf test log dir
+get_perf_test_log_dir()
+{
+	perf_log_dir="$PERF_RUNNER_HOME/logs/$perf_test_name/$perf_test_uuid"
+	if [ ! -d "$perf_log_dir" ]
+	then
+		mkdir -p $perf_log_dir
+	fi
+	echo "$perf_log_dir"
+}
 create_perf_test_uuid()
 {
 	perf_test_name=$1

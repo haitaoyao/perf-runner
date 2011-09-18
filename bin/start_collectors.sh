@@ -24,12 +24,12 @@ then
 	exit 1
 fi
 
-perf_data_dir=$(get_perf_test_data_dir)
+perf_log_dir=$(get_perf_test_log_dir)
 
 cd $PERF_RUNNER_HOME/collectors
 perf_pid_dir=$(get_perf_test_runtime_dir)
 for perf_collector in $(ls |sort)
 do
-	nohup $perf_collector/start.sh >> $perf_data_dir/$perf_collector.csv &
+	nohup $perf_collector/start.sh >> $perf_log_dir/$perf_collector.csv &
 	echo $! > $perf_pid_dir/$perf_collector.pid
 done
