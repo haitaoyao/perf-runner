@@ -3,3 +3,4 @@ runtime/
 data/
 .svn/
 .git/
+tmp/

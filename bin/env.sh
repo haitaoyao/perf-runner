@@ -62,3 +62,9 @@ create_perf_test_uuid()
 	perf_test_name=$1
 	echo "${perf_test_name}__$(date +%Y%m%d.%H%M%S.$(expr $(date +%s ) % 100)) "
 }
+
+get_server_address()
+{
+	server_file=$1
+	echo "$(cat $server_file|grep -v  '#' )"
+}
