@@ -12,7 +12,13 @@ current_dir="$(cd $(dirname $0);pwd)"
 function print_help()
 {
 	echo
-	echo "Usage: $0 "
+	echo "Usage: $0 -n perf_test_name -u perf_test_uuid -i refresh_interval -c collector_name"
+	echo
+	printf "\t-n\t the perf test name in deploy dir\n"
+	printf "\t-u\t the perf test uuid\n"
+	printf "\t-i\t the refresh interval. default: 1 second. unit: second\n"
+	printf "\t-c\t the collector name. \n"
+	echo
 }
 
 if [ -z "$1" ]
