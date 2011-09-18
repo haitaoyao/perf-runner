@@ -85,6 +85,7 @@ function cleanup_collectors()
 		if [ -n "$(ps aux|grep $collector_pid)|grep -v 'grep'" ]
 		then
 			kill -9 $collector_pid
+			rm $pid_file
 			printf "\tcollector: $pid_file killed\n"
 		fi
 	done
