@@ -1,2 +1,10 @@
 This is a runner for perf test
 
+While running the performance test for distributed systems, it's a little annoying to collect the basic system status. Setting up new monitoring cluster in ganglia is not easy.
+
+The perf-runner is here for you!
+
+Put your performance test under deploy folder, and start the test! The runner will start all the servers as configured, check their status, and gather all the performance data for you!
+You can also write the customized collector for you specific test to collect whatever data you want!
+
+
