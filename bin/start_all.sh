@@ -43,3 +43,11 @@ do
 		fi
 	done
 done
+echo
+echo "##############################################"
+echo "#"
+echo "#               perf test: $perf_test_name"
+echo "#               perf uuid: $perf_test_uuid"
+echo "#		       started"
+echo "#"
+echo "##############################################"

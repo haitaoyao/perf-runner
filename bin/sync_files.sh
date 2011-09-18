@@ -34,8 +34,6 @@ do
 		echo "no server address in $PERF_RUNNER_DEPLOY_DIR/$perf_test_name/$server_group/servers.conf, script exit"
 		exit 2
 	fi
-	echo "rsync files for server group: $server_group, servers: "
-	echo "$(cat $server_group/servers.conf)"
 	for server_address in $(cat $server_group/servers.conf)
 	do
 		rsync -a --exclude-from=$PERF_RUNNER_CONFIG_DIR/sync_excluded_files $PERF_RUNNER_HOME/ $server_address:$PERF_RUNNER_HOME/
@@ -44,8 +42,6 @@ do
 		then
 			echo "failed to sync files for server: $server_address, server_group: $server_group, script exit"
 			exit 2
-		else
-			echo "sync file success for server: $server_address, server_group: $server_group"
 		fi
 	done
 done
