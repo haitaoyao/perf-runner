@@ -11,6 +11,7 @@ export PERF_RUNNER_HOME="$(cd $(dirname $0)/../;pwd)"
 export PERF_RUNNER_DEPLOY_DIR=$PERF_RUNNER_HOME/deploy
 export PERF_RUNNER_RUNTIME=$PERF_RUNNER_HOME/tmp/runtime
 export PERF_RUNNER_CONFIG_DIR=$PERF_RUNNER_HOME/config
+export PERF_RUNNER_DATA_DIR=$PERF_RUNNER_HOME/data
 if [ ! -d $PERF_RUNNER_HOME/logs ]
 then
 	mkdir $PERF_RUNNER_HOME/logs
@@ -99,4 +100,15 @@ function cleanup_runtime_dir()
 		cd ../
 		rm -rf $perf_test_uuid
 	fi
+}
+
+# get the perf data dir
+get_perf_data_dir()
+{
+	perf_data_dir="$PERF_RUNNER_DATA_DIR/$perf_test_name/$perf_test_uuid/$server_group/$server_address"
+	if [ ! -d "$perf_data_dir" ]
+	then
+		mkdir -p $perf_data_dir
+	fi
+	echo $perf_data_dir
 }
