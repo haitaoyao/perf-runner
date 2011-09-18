@@ -1,0 +1,5 @@
+logs/
+runtime/
+data/
+.svn/
+.git/
