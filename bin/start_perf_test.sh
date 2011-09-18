@@ -33,4 +33,4 @@ perf_pid_dir=$(get_perf_test_runtime_dir)
 nohup bash $server_group/start.sh >> $(get_perf_test_log_dir)/$server_group.csv 2>$(get_perf_test_data_dir)/$server_group.log &
 
 # remember the pid 
-echo $! > $perf_pid_dir/$perf_test_name.pid
+echo $! > $perf_pid_dir/${perf_test_name}.pid

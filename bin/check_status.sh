@@ -11,7 +11,6 @@ current_dir="$(cd $(dirname $0);pwd)"
 
 perf_test_name=$1
 perf_test_uuid=$2
-
 if [ -z "$perf_test_name" ]
 then
 	echo "Usage: $0 perf_test_name perf_test_uuid"
@@ -23,19 +22,6 @@ then
 	echo "no perf test: $perf_test_name runnning"
 	exit 0
 fi
-
-function cleanup_collectors()
-{
-	for pid_file in $(ls *.pid|grep -v "$perf_test_name")
-	do
-		collector_pid=$(cat $pid_file)
-		if [ -n "$(ps aux|grep $collector_pid)|grep -v 'grep'" ]
-		then
-			kill -9 $collector_pid
-			printf "\tcollector: $pid_file killed\n"
-		fi
-	done
-}
 
 function status_collectors()
 {

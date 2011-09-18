@@ -68,3 +68,17 @@ get_server_address()
 	server_file=$1
 	echo "$(cat $server_file|grep -v  '#' )"
 }
+
+# kill the collectors
+function cleanup_collectors()
+{
+	for pid_file in $(ls *.pid|grep -v "$perf_test_name")
+	do
+		collector_pid=$(cat $pid_file)
+		if [ -n "$(ps aux|grep $collector_pid)|grep -v 'grep'" ]
+		then
+			kill -9 $collector_pid
+			printf "\tcollector: $pid_file killed\n"
+		fi
+	done
+}
