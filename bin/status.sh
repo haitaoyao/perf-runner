@@ -11,12 +11,31 @@ current_dir="$(cd $(dirname $0);pwd)"
 # print the help information
 print_help()
 {
-	echo "Usage: $0 perf_test_name perf_test_uuid(optional)"
-	printf "\tperf_test_name\t the perf test name in the deploy folder\n"
-	printf "\tperf_test_uuid(optional)\t the uuid of the test, if not provided, this will check all the status"
+	echo 
+	echo "$0 - Check the running status of the perf test"
+	echo "Usage: $0 -n perf_test_name -u perf_test_uuid(optional)"
+	printf "\t-n\t the perf test name in the deploy folder\n"
+	printf "\t-u\t the uuid of the test, if not provided, this will check all the status\n"
+	echo
 }
-perf_test_name=$1
-perf_test_uuid=$2
+while getopts ":n:u:" OPT
+do
+	case $OPT in
+		n)
+			perf_test_name=$OPTARG
+			;;
+		u)
+			perf_test_uuid=$OPTARG
+			;;
+		:)
+			print_help
+			exit 1
+			;;
+		?)
+			print_help
+			;;
+	esac
+done
 if [ -z "$perf_test_name" ]
 then
 	print_help

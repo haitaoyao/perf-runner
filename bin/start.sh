@@ -11,7 +11,8 @@ current_dir="$(cd $(dirname $0);pwd)"
 # print the help information
 function print_help()
 {
-	echo "perf-runner start script"
+	echo
+	echo "$0 - perf-runner start script"
 	echo "Usage: $0 -n perf_test_name"
 	echo
 	printf "\tperf_test_name\t the perf test name deployed in the deploy folder\n"

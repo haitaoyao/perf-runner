@@ -11,7 +11,8 @@ current_dir="$(cd $(dirname $0);pwd)"
 
 function print_help()
 {
-	echo "Stop the perf test"
+	echo
+	echo "$0 - Stop the perf test"
 	echo "Usage: $0 perf_test_name perf_test_uuid"
 	echo
 	printf "\tperf_test_name\t the perf test name in deploy folder\n"
