@@ -38,6 +38,6 @@ cd $PERF_RUNNER_HOME/collectors
 perf_pid_dir=$(get_perf_test_runtime_dir)
 for perf_collector in $(ls |sort)
 do
-	nohup $perf_collector/start.sh >> $perf_log_dir/$perf_collector.csv &
+	nohup $perf_collector/start.sh >> $perf_log_dir/$perf_collector.csv 2>/dev/null&
 	echo $! > $perf_pid_dir/$perf_collector.pid
 done
