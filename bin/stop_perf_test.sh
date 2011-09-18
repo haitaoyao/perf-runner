@@ -41,7 +41,17 @@ function stop_perf_test()
 	perf_pid=$(cat $pid_file)
 	if [ -n "$(ps aux|grep $perf_pid|grep -v grep)" ]
 	then
-		if [ -f "$PERF_DEPLOY_DIR/$perf_name/" ]	
+		if [ -f "$PERF_DEPLOY_DIR/$perf_test_name/stop.sh" ]
+		then
+			bash $PERF_DEPLOY_DIR/$perf_test_name/stop.sh $perf_pid
+		else
+			kill -9 $perf_pid
+		fi
+		echo "$perf_test_name stopped"
 	fi
 }
-cd $PERF_RUNNER_DELOY_DIR/$perf_test_name
+
+stop_perf_test
+cleanup_collectors
+cd ../
+rm -rf $perf_test_uuid

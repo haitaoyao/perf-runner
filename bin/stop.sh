@@ -34,3 +34,20 @@ then
 	print_help
 	exit 1
 fi
+
+cd $PERF_RUNNER_DEPLOY_DIR/$perf_test_name
+
+for server_group in $(ls |sort)
+do
+	if [ ! -d $server_group ]
+	then
+		continue
+	fi
+	echo "stop perf unit: $server_group"	
+	for server_address in $(get_server_address $server_group/servers.conf)
+	do
+		echo "stop perf_test: $perf_test_name @ $server_address: "
+		ssh $server_address "bash $PERF_RUNNER_HOME/bin/stop_perf_test.sh $perf_test_name $perf_test_uuid"
+	done
+	echo
+done
