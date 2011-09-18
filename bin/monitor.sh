@@ -71,6 +71,7 @@ cd $PERF_RUNNER_DEPLOY_DIR/$perf_test_name
 
 function monitor_perf_test()
 {
+	printf "\t\t current perf data for collector: $collector_name\n"
 	for server_group in $(ls |sort)
 	do
 		if [ ! -d "$server_group" ]
@@ -92,6 +93,6 @@ while :
 do
 	monitor_perf_test
 	sleep $monitor_interval
-	printf "\n\n\n"
+	printf "\n\n"
 done
 
