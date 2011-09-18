@@ -22,6 +22,12 @@ then
 	print_help
 	exit 1
 fi
+if [ ! -d "$PERF_RUNNER_DEPLOY_DIR/$perf_test_name" ]
+then
+	echo "invalid perf test name: $perf_test_name"
+	print_help
+	exit 2
+fi
 cd $PERF_RUNNER_DEPLOY_DIR/$perf_test_name
 
 check_server_group_status()
