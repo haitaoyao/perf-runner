@@ -66,8 +66,10 @@ then
 	status_perf_test $perf_test_uuid
 else
 	echo "check all the perf  test for $perf_test_name"
+	now_cwd=$(pwd)
 	for perf_test_uuid in $(ls |sort)
 	do
+		cd $now_cwd
 		if [ -d "$perf_test_uuid/$server_group" ]
 		then
 			status_perf_test $perf_test_uuid
