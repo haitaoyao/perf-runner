@@ -12,7 +12,8 @@ current_dir="$(cd $(dirname $0);pwd)"
 function print_help()
 {
 	echo
-	echo "Usage: $0 -n perf_test_name -u perf_test_uuid -i refresh_interval -c collector_name"
+	printf "$0 - check the current status of running performance test\n\n"
+	printf "Usage: $0 -n perf_test_name -u perf_test_uuid -i refresh_interval -c collector_name\n"
 	echo
 	printf "\t-n\t the perf test name in deploy dir\n"
 	printf "\t-u\t the perf test uuid\n"
