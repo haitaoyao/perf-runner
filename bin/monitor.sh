@@ -90,7 +90,7 @@ function monitor_perf_test()
 		do
 			printf "\t$server_address:\t"
 			fetch_command="tail -1 $(get_perf_test_log_dir)/$collector_name.csv"
-			printf "$(ssh localhost $fetch_command)\n"
+			printf "$(ssh $server_address $fetch_command)\n"
 		done
 	done
 
