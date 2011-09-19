@@ -13,15 +13,31 @@ function print_help()
 {
 	echo
 	echo "$0 - Stop the perf test"
-	echo "Usage: $0 perf_test_name perf_test_uuid"
+	echo "Usage: $0 -n perf_test_name -i perf_test_uuid"
 	echo
-	printf "\tperf_test_name\t the perf test name in deploy folder\n"
-	printf "\tperf_test_uuid\t the perf test uuid, if not known, use status.sh to find it out\n"
+	printf "\t-n\t the perf test name in deploy folder\n"
+	printf "\t-i\t the perf test uuid, if not known, use status.sh to find it out\n"
 	echo
 }
 
-perf_test_name=$1
-perf_test_uuid=$2
+while getopts ":n:u:" OPT
+do
+	case $OPT in
+		n)
+			perf_test_name=$OPTARG
+			;;
+		u)
+			perf_test_uuid=$OPTARG
+			;;
+		:)
+			print_help
+			exit 1
+			;;
+		?)
+			print_help
+			;;
+	esac
+done
 if [ -z "$perf_test_name" -o -z "$perf_test_uuid" ]
 then
 	print_help
