@@ -29,11 +29,12 @@ function status_collectors()
 	for pid_file in $(ls *.pid|grep -v "$perf_test_name")
 	do
 		collector_pid=$(cat $pid_file)
+		collector_name=$(echo $pid_file|awk -F '.pid' '{print $1}')	
 		if [ -n "$(ps aux|grep $collector_pid)" ]
 		then
-			printf "\tcollector: $pid_file is alive\n"
+			printf "\tcollector: $collector_name(pid: $collector_pid) is alive\n"
 		else
-			printf "\tcollector: $pid_file is dead\n"
+			printf "\tcollector: $collector_name(pid: $collector_pid) is dead\n"
 		fi
 	done
 		
