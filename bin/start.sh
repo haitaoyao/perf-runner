@@ -7,7 +7,7 @@
 # 
 ##################################################################
 current_dir="$(cd $(dirname $0);pwd)"
-. $current_dir/env.sh
+. $current_dir/../lib/env.sh
 # print the help information
 function print_help()
 {
@@ -52,13 +52,13 @@ then
 fi
 
 # sync files
-bash $current_dir/sync_files.sh $perf_test_name
+bash $PERF_RUNNER_LIB_DIR/sync_files.sh $perf_test_name
 if [ "$?" -ne 0 ]
 then
 	exit 2
 fi
 
-bash $current_dir/start_all.sh $perf_test_name
+bash $PERF_RUNNER_LIB_DIR/start_all.sh $perf_test_name
 if [ "$?" -ne 0 ]
 then
 	exit 2

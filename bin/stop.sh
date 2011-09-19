@@ -7,7 +7,7 @@
 # 
 ##################################################################
 current_dir="$(cd $(dirname $0);pwd)"
-. $current_dir/env.sh
+. $current_dir/../lib/env.sh
 
 function print_help()
 {
@@ -48,9 +48,9 @@ do
 	for server_address in $(get_server_address $server_group/servers.conf)
 	do
 		echo "stop perf_test: $perf_test_name @ $server_address: "
-		ssh $server_address "bash $PERF_RUNNER_HOME/bin/stop_perf_test.sh $perf_test_name $server_group $perf_test_uuid"
+		ssh $server_address "bash $PERF_RUNNER_LIB_DIR/stop_perf_test.sh $perf_test_name $server_group $perf_test_uuid"
 	done
 	echo
 done
-bash $current_dir/gather_result.sh $perf_test_name $perf_test_uuid
-bash $current_dir/cleanup_result.sh $perf_test_name $perf_test_uuid
+bash $PERF_RUNNER_LIB_DIR/gather_result.sh $perf_test_name $perf_test_uuid
+bash $PERF_RUNNER_LIB_DIR/cleanup_result.sh $perf_test_name $perf_test_uuid

@@ -7,7 +7,7 @@
 # 
 ##################################################################
 current_dir="$(cd $(dirname $0);pwd)"
-. $current_dir/env.sh
+. $current_dir/../lib/env.sh
 # print the help info
 function print_help()
 {
@@ -78,7 +78,7 @@ cd $PERF_RUNNER_DEPLOY_DIR/$perf_test_name
 
 function monitor_perf_test()
 {
-	printf "\t\t current perf data for collector: $collector_name\n"
+	printf "\t\t time: $(date +'%Y-%m-%d %H:%M:%S') collector: $collector_name\n"
 	for server_group in $(ls |sort)
 	do
 		if [ ! -d "$server_group" ]

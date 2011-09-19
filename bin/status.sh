@@ -7,7 +7,7 @@
 # 
 ##################################################################
 current_dir="$(cd $(dirname $0);pwd)"
-. $current_dir/env.sh
+. $current_dir/../lib/env.sh
 # print the help information
 print_help()
 {
@@ -58,7 +58,7 @@ check_server_group_status()
 	for server_address in $(get_server_address $server_group/servers.conf)
 	do
 		echo "perf_test: $perf_test_name status @ $server_address: "
-		ssh $server_address "bash $PERF_RUNNER_HOME/bin/check_status.sh $perf_test_name $server_group $perf_test_uuid"
+		ssh $server_address "bash $PERF_RUNNER_LIB_DIR/check_status.sh $perf_test_name $server_group $perf_test_uuid"
 	done
 }
 
