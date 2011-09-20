@@ -68,7 +68,7 @@ get_perf_test_log_dir()
 create_perf_test_uuid()
 {
 	perf_test_name=$1
-	echo "${perf_test_name}__$(date +%Y%m%d.%H%M%S.$(expr $(date +%s ) % 100)) "
+	echo "${perf_test_name}__$(date +%Y%m%d.%H%M%S.$(expr $(date +%N ) % 100)) "
 }
 
 get_server_address()
