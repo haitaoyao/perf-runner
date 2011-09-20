@@ -39,7 +39,7 @@ function process_test_unit()
 	write_to_report "<table align='center' border='1'>"
 	test_unit=$1
 	cd $test_unit
-	write_to_report "<tr><td>TestUnit: $test_unit</td></tr>"
+	write_to_report "<tr><td bgcolor='gray'>TestUnit: $test_unit</td></tr>"
 	write_to_report "<tr><td>"
 	for server_address in $(ls )
 	do
@@ -48,12 +48,14 @@ function process_test_unit()
 		for data_file in $(ls *.csv|grep -v $perf_test_name)
 		do
 			collector_name=$(echo $data_file|awk -F'.csv' '{print $1}')
-			write_to_report "<tr><td>$collector_name(<a href='$test_unit/$server_address/$data_file'>Download</a>)</td></tr>"
+			write_to_report "<tr><td>$server_address: $collector_name(<a href='$test_unit/$server_address/$data_file'>Download</a>)</td></tr>"
 			if [ -f "$collector_name.png" ]
 			then
 				write_to_report "<tr><td><img src='$test_unit/$server_address/$collector_name.png' /></td></tr>"
 				write_to_report "<tr><td></td></tr>"
 			fi
+			write_to_report "<tr><td>------------------------------------------------------------------------------------------------</td> </tr>"
+			write_to_report "<tr><td>------------------------------------------------------------------------------------------------</td> </tr>"
 		done
 		write_to_report "</tr></table>"
 		cd ..
