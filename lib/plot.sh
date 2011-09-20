@@ -9,6 +9,14 @@
 current_dir="$(cd $(dirname $0);pwd)"
 . $current_dir/env.sh
 
+which gnuplot >/dev/null 2>&1
+if [ "$?" -ne 0 ]
+then
+	echo "no gnuplot found! cant't plot!"
+	exit 1
+fi
+
+
 function print_help()
 {
 	echo "Usage: $0 perf_test_name perf_test_uuid"
