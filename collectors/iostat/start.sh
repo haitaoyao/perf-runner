@@ -9,7 +9,7 @@
 current_dir="$(cd $(dirname $0);pwd)"
 
 wait_interval=5
-echo "#timestamp,tps, kB_read/s, kB_wrtn/s, kB_read, kB_wrtn"
+echo "#timestamp,tps,kB_read/s,kB_wrtn/s,kB_read,kB_wrtn"
 while :
 do
 	sleep $wait_interval
