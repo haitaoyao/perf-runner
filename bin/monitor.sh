@@ -78,7 +78,7 @@ cd $PERF_RUNNER_DEPLOY_DIR/$perf_test_name
 
 function monitor_perf_test()
 {
-	printf "\t\t time: $(date +'%Y-%m-%d %H:%M:%S') collector: $collector_name\n"
+	printf "\t\t perf_test: $perf_test_name, uuid: $perf_test_uuid, collector: $collector_name, time: $(date +'%Y-%m-%d %H:%M:%S')\n"
 	for server_group in $(ls |sort)
 	do
 		if [ ! -d "$server_group" ]
