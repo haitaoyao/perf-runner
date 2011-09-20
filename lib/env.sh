@@ -83,11 +83,12 @@ function cleanup_collectors()
 	for pid_file in $(ls *.pid|grep -v "$perf_test_name")
 	do
 		collector_pid=$(cat $pid_file)
+		collector_name=$(echo $pid_file|awk -F '.pid' '{print $1}')	
 		if [ -n "$(ps aux|grep $collector_pid)|grep -v 'grep'" ]
 		then
 			kill -9 $collector_pid
 			rm $pid_file
-			printf "\tcollector: $pid_file killed\n"
+			printf "\tcollector: $collector_name(pid: $collector_pid) killed\n"
 		fi
 	done
 }
