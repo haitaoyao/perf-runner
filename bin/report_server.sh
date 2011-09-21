@@ -74,5 +74,8 @@ then
 	exit 1
 fi
 cd $perf_data_dir
+
+bash $PERF_RUNNER_LIB_DIR/plot.sh $perf_test_name $perf_test_uuid
+bash $PERF_RUNNER_LIB_DIR/generate_report.sh $perf_test_name $perf_test_uuid
 echo "start data server @ port: $server_port"
 python -m SimpleHTTPServer $server_port 2>/dev/null
