@@ -10,7 +10,8 @@ current_dir="$(cd $(dirname $0);pwd)"
 . $current_dir/env.sh
 
 perf_test_name=$1
-
+perf_test_duration=$2
+perf_test_callback=$3
 if [ -z "$perf_test_name" ]
 then
 	echo "Usage: $0 perf_test_name"
@@ -43,6 +44,28 @@ do
 		fi
 	done
 done
+
+function schedule_callback()
+{
+	if [ -z "$perf_test_callback" -o -z "$perf_test_duration" ]
+	then
+		return 0
+	fi
+	current_time=$(date +%s)
+	end_time=$(date -d "$perf_test_duration hours" +%s)
+	running_interval=$(expr $end_time - $current_time)
+	run_callback $running_interval	 &
+	end_time=$(date -d "$perf_test_duration hours" +'%Y-%m-%d %H:%m:%S')
+	printf "\t perf test: $perf_test_name will be stopped at $end_time, callback: $perf_test_callback will be executed\n"
+}
+
+function run_callback()
+{
+	sleep_interval=$1
+	sleep $sleep_interval
+	bash "$PERF_RUNNER_BIN_DIR/stop.sh -n $perf_test_name -u $perf_test_uuid" >/dev/null 2>&1
+	$perf_test_callback
+}
 echo
 echo "##############################################"
 echo "#"
