@@ -8,3 +8,4 @@ Put your performance test under deploy folder, and start the test! The runner wi
 You can also write the customized collector for you specific test to collect whatever data you want!
 
 
+
